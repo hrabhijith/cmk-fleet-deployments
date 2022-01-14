@@ -64,6 +64,6 @@ spec:
        # Change this to modify the CMK config dir in the host file system.
          path: "/etc/cmk"
         name: cmk-conf-dir
-      nodeSelector:
-       kubernetes.io/hostname: "katpk029"
+     nodeSelector:
+      kubernetes.io/hostname: "katpk029"
       
