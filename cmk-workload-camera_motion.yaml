@@ -12,7 +12,7 @@ spec:
   selector:
    matchLabels:
     app: cmk-workload1-pod
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       labels:
@@ -42,10 +42,10 @@ spec:
         - name: tmp-unix
           mountPath: "/tmp/.X11-unix"
         securityContext:
-         allowPrivilegeEscalation: false
+         allowPrivilegeEscalation: true
          readOnlyRootFilesystem: true
          runAsNonRoot: false
-         privileged: false
+         privileged: true
          capabilities:
           drop:
            - all
