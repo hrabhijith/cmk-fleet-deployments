@@ -12,7 +12,7 @@ spec:
   selector:
    matchLabels:
     app: cmk-workload1-pod
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
@@ -23,7 +23,7 @@ spec:
       - name: cmk-isolate-exclusive-workload
         image: hrabhijith2/rpi-detection:motionx86
         imagePullPolicy: Always
-        tty: true
+        tty: false
         env:
         - name: DISPLAY
           value: ":0"
