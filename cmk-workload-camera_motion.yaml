@@ -27,8 +27,6 @@ spec:
         env:
         - name: DISPLAY
           value: ":0"
-        - name: QT_X11_NO_MITSHM
-          value: "1"
         resources:
          requests:
           cmk.intel.com/exclusive-cores: '1'
