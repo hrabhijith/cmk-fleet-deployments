@@ -23,7 +23,7 @@ spec:
       - name: cmk-isolate-exclusive-workload
         image: hrabhijith2/rpi-detection:motionx86
         imagePullPolicy: Always
-        tty: false
+        tty: true
         env:
         - name: DISPLAY
           value: ":0"
