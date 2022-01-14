@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cmk-workload1-pod
+  name: cmk-workload1-pod
+# Consumed by mutating webhook
+  annotations:
+    cmk.intel.com/mutate: "true" # accepted values to trigger mutation: "true", "True", "1"
+  namespace: cmk-namespace
+spec:
+  selector:
+   matchLabels:
+    app: cmk-workload1-pod
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app: cmk-workload1-pod
+    spec:
+      serviceAccountName: cmk-serviceaccount
+      containers:
+      - name: cmk-isolate-exclusive-workload
+        image: hrabhijith2/rpi-detection:motionx86
+        imagePullPolicy: Always
+        tty: true
+        env:
+        - name: DISPLAY
+          value: ":0"
+        - name: QT_X11_NO_MITSHM
+          value: "1"
+        resources:
+         requests:
+          cmk.intel.com/exclusive-cores: '1'
+         limits:
+          cmk.intel.com/exclusive-cores: '1'
+        volumeMounts:
+        - name: tmp
+          mountPath: "/tmp"
+        - name: dev-video0
+          mountPath: "/dev/video0"
+        - name: tmp-unix
+          mountPath: "/tmp/.X11-unix"
+        securityContext:
+         allowPrivilegeEscalation: true
+         readOnlyRootFilesystem: true
+         runAsNonRoot: false
+         privileged: true
+         capabilities:
+          drop:
+           - all
+      volumes:
+      - hostPath:
+         path: "/tmp"
+        name: tmp
+      - name: dev-video0
+        hostPath:
+         path: "/dev/video0"
+      - name: tmp-unix
+        hostPath:
+         path: "/tmp/.X11-unix"
+      nodeSelector:
+       kubernetes.io/hostname: "katpk029"
