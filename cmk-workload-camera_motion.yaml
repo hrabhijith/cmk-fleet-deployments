@@ -67,14 +67,12 @@ spec:
         hostPath:
          path: "/dev/vid
       - hostPath:
-      # Change this to modify the CMK installation dir in the host file system.
          path: "/opt/bin"
         name: cmk-install-dir
       - hostPath:
          path: "/proc"
         name: cmk-host-proc
       - hostPath:
-       # Change this to modify the CMK config dir in the host file system.
          path: "/etc/cmk"
         name: cmk-conf-direo0"
       nodeSelector:
