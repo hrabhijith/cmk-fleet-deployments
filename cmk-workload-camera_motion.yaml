@@ -19,6 +19,8 @@ spec:
         app: cmk-workload1-pod
     spec:
       serviceAccountName: cmk-serviceaccount
+      tolerations:
+      - operator: "Exists"
       containers:
       - name: cmk-isolate-exclusive-workload
         image: hrabhijith2/rpi-detection:motionx86
@@ -27,6 +29,9 @@ spec:
         ports:
          - containerPort: 5006
            hostPort: 5006
+        env:
+        - name: CMK_PROC_FS
+          value: "/host/proc"
         resources:
          requests:
           cmk.intel.com/exclusive-cores: '1'
@@ -37,6 +42,15 @@ spec:
           mountPath: "/tmp"
         - name: dev-video0
           mountPath: "/dev/video0"
+        - name: tmp
+          mountPath: "/tmp"
+        - mountPath: "/host/proc"
+          name: cmk-host-proc
+          readOnly: true
+        - mountPath: "/opt/bin"
+          name: cmk-install-dir
+        - mountPath: "/etc/cmk"
+          name: cmk-conf-dir
         securityContext:
          allowPrivilegeEscalation: true
          readOnlyRootFilesystem: true
@@ -51,6 +65,17 @@ spec:
         name: tmp
       - name: dev-video0
         hostPath:
-         path: "/dev/video0"
+         path: "/dev/vid
+      - hostPath:
+      # Change this to modify the CMK installation dir in the host file system.
+         path: "/opt/bin"
+        name: cmk-install-dir
+      - hostPath:
+         path: "/proc"
+        name: cmk-host-proc
+      - hostPath:
+       # Change this to modify the CMK config dir in the host file system.
+         path: "/etc/cmk"
+        name: cmk-conf-direo0"
       nodeSelector:
        kubernetes.io/hostname: "katpk029"
