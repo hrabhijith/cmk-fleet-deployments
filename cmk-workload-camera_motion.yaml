@@ -51,6 +51,6 @@ spec:
         name: tmp
       - name: dev-video0
         hostPath:
-         path: "/dev/vid
+         path: "/dev/video0"
       nodeSelector:
        kubernetes.io/hostname: "katpk029"
