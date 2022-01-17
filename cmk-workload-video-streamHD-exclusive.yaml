@@ -47,4 +47,4 @@ spec:
          path: "/tmp"
         name: tmp
      nodeSelector:
-       kubernetes.io/hostname: "katpk029"
+       kubernetes.io/hostname: "alderlake"
