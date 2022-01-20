@@ -46,3 +46,5 @@ spec:
       - hostPath:
          path: "/tmp"
         name: tmp
+     nodeSelector:
+       kubernetes.io/hostname: "alderlake"
