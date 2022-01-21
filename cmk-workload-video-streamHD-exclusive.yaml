@@ -25,6 +25,7 @@ spec:
         imagePullPolicy: Always
         ports:
          - containerPort: 5004
+           hostPort: 5004
         resources:
          requests:
           cmk.intel.com/exclusive-cores: '1'
