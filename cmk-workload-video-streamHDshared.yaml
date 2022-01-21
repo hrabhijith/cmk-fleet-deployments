@@ -12,7 +12,7 @@ spec:
   selector:
    matchLabels:
     app: cmk-workload7-pod
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
@@ -23,7 +23,7 @@ spec:
      - operator: "Exists"
      containers:
       - name: cmk-isolate-shared-workload7
-        image: hrabhijith2/playhd:shared
+        image: hrabhijith2/play:sample1
         imagePullPolicy: Always
         ports:
          - containerPort: 5005
@@ -65,5 +65,5 @@ spec:
          path: "/etc/cmk"
         name: cmk-conf-dir
      nodeSelector:
-      kubernetes.io/hostname: "katpk029"
+      kubernetes.io/hostname: "alderlake"
       
