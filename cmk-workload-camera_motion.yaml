@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: cmk-workload1-pod
-  name: cmk-workload1-pod
+    app: cmk-workload1-2-pod
+  name: cmk-workload1-2-pod
 # Consumed by mutating webhook
   annotations:
     cmk.intel.com/mutate: "true" # accepted values to trigger mutation: "true", "True", "1"
@@ -11,12 +11,12 @@ metadata:
 spec:
   selector:
    matchLabels:
-    app: cmk-workload1-pod
+    app: cmk-workload1-2-pod
   replicas: 1
   template:
     metadata:
       labels:
-        app: cmk-workload1-pod
+        app: cmk-workload1-2-pod
     spec:
       serviceAccountName: cmk-serviceaccount
       containers:
@@ -26,7 +26,7 @@ spec:
         tty: true
         ports:
          - containerPort: 5006
-           hostPort: 5006
+           hostPort: 5007
         resources:
          requests:
           cmk.intel.com/exclusive-cores: '1'
